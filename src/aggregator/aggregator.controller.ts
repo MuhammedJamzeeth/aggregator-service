@@ -1,11 +1,11 @@
 import { Controller, Get, Logger, Query } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { CircuitBreaker } from './circute.breaker';
+import { CircuitBreaker } from 'src/circute.breaker';
 
 @Controller()
-export class AppController {
-  private readonly logger = new Logger(AppController.name);
+export class AggregatorController {
+  private readonly logger = new Logger(AggregatorController.name);
   private readonly httpService = new HttpService();
   private coastalDestinations = ['HKT', 'UTP', 'GOA', 'MLE'];
   private weatherCircuitBreaker: CircuitBreaker;
@@ -16,7 +16,7 @@ export class AppController {
   };
 
   constructor() {
-    this.weatherCircuitBreaker = new CircuitBreaker('WeatherService', {
+    this.weatherCircuitBreaker = new CircuitBreaker({
       failureThreshold: 0.5,
       windowSize: 10,
       cooldownMs: 3000,

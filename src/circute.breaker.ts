@@ -26,7 +26,6 @@ export class CircuitBreaker {
   private halfOpenAttempts: number = 0;
 
   constructor(
-    private serviceName: string,
     private config: CircuitBreakerConfig,
   ) {
   }
